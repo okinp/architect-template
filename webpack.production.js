@@ -6,7 +6,7 @@ module.exports = merge(common(), {
   mode: "production",
   devtool: "source-map",
   output: {
-    publicPath: "/staticfiles/"
+    publicPath: "/"
   },
   plugins: [
     new OptimizeCssAssetsPlugin({

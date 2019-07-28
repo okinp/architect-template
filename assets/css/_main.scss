@@ -114,9 +114,20 @@ header {
   margin-top: 32px;
   z-index: 100;
   border: 1px solid $border-color;
+  @include in-mobile {
+    border: none;
+    height: 100px;
+  }
   transition: border-color 0.15s, background-color 0.15s;
   left: 50%;
   transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  @include in-mobile {
+    background-color: $header-scrolled;
+    border-color: $header-scrolled;
+    margin: 0;
+  }
   > img {
     margin-left: 43px;
     height: 100%;
@@ -129,14 +140,86 @@ header {
   }
 }
 
+label[for="burger"] {
+  display: none;
+  @include in-mobile {
+    display: initial;
+  }
+  height: 20px;
+  cursor: pointer;
+  order: 10;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: 43px;
+  // display: inline-block;
+  span {
+    display: block;
+    width: 35px;
+    height: 3px;
+    border-radius: 1.5px;
+    margin-top: 3px;
+    background: white;
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
+}
+
+#burger {
+  display: none;
+  @include in-mobile {
+    &:checked + nav {
+      display: initial;
+      top: 99px;
+    }
+    &:not(:checked) + nav {
+      display: none;
+
+      max-height: 0;
+    }
+  }
+}
+
 nav {
   right: 0;
   bottom: 0;
   position: absolute;
+  @include in-mobile {
+    min-height: calc(100vh - 99px);
+    background: $header-scrolled;
+    left: 0;
+    right: 0;
+    > .navlist {
+      display: inline-block;
+      > .navlist__item {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        height: 50px;
+        border-left: none;
+        &:after {
+          content: "";
+          width: 100%;
+          height: 1px;
+          background-color: $gray;
+          position: absolute;
+          bottom: 0;
+          z-index: 10;
+          opacity: 0.1;
+        }
+      }
+    }
+  }
 }
 .navlist {
   padding: 0;
   height: 100%;
+  @include in-mobile {
+    width: 100%;
+  }
 }
 .navlist__item {
   display: inline-block;
@@ -150,6 +233,9 @@ nav {
   justify-content: center;
   height: 100%;
   cursor: pointer;
+  @include in-mobile {
+    height: auto;
+  }
   > span {
     font-family: "Roboto Condensed", sans-serif;
     font-size: 1.3rem;
@@ -205,6 +291,9 @@ section {
     height: 100%;
     margin-left: 40px;
     margin-right: 40px;
+    @include in-mobile {
+      margin: 0;
+    }
   }
 }
 
@@ -215,6 +304,9 @@ section {
     > img {
       display: inline-block;
       grid-column: 5 / -1;
+      @include in-mobile {
+        grid-column: 4 / -1;
+      }
       object-fit: cover;
       height: 100%;
       min-width: 999px;
@@ -226,27 +318,26 @@ section {
       text-transform: uppercase;
       margin-top: 29.6rem;
       grid-column: 2 / span 2;
+      @include in-mobile {
+        margin-top: 15rem;
+        grid-column: 2 / span 5;
+      }
+
       letter-spacing: 0.104rem;
       line-height: 1.538;
       position: relative;
       transform: translate(-200%);
     }
 
-    > .project-category {
-      color: white;
-      grid-column: 2 / span 2;
-      margin-top: 335px;
-      margin-bottom: 16px;
-      font-family: "Roboto Condensed", sans-serif;
-      color: black;
-      text-transform: uppercase;
-      font-size: 13px;
-    }
     > h1 {
       grid-column: 2 / span 6;
       z-index: 3;
       position: relative;
       left: -5px;
+      @include in-mobile {
+        grid-column: 2 / span 9;
+        font-size: 4rem;
+      }
     }
 
     > p {
@@ -261,6 +352,9 @@ section {
     }
     > .year {
       grid-column: 4 / span 1;
+      @include in-mobile {
+        grid-column: 2 / span 1;
+      }
     }
     > .read-more {
       cursor: pointer;
@@ -320,17 +414,32 @@ section {
   padding-bottom: 18rem;
   > .section-content {
     margin-top: 30.4rem;
+    @include in-mobile {
+      margin-top: 12rem;
+    }
     > img {
       display: inline-block;
       grid-column: 2 / span 3;
+
       object-fit: cover;
       width: 100%;
       max-width: 319px;
       height: 100%;
       min-height: 490px;
+      @include in-mobile {
+        grid-column: 1 / -1;
+        margin: 0 5px;
+        min-width: 100%;
+        max-width: unset;
+        height: auto;
+      }
     }
     > .details {
       grid-column: 5 / span 7;
+      @include in-mobile {
+        grid-column: 1 / -1;
+        margin: 0 5px;
+      }
       display: flex;
       flex-direction: column;
       height: 100%;
@@ -373,6 +482,9 @@ section {
     }
     > .history {
       grid-column: 5 / span 4;
+      @include in-mobile {
+        grid-column: 1 / span 6;
+      }
       min-height: 15.5rem;
       position: relative;
       top: -20px;

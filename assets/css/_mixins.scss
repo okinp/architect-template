@@ -8,3 +8,9 @@
   grid-gap: 20px;
   column-gap: 20px;
 }
+
+@mixin in-mobile {
+  @media screen and (max-width: $mobile-breakpoint) {
+    @content;
+  }
+}
